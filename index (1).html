@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="de">
+<head><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="theme-color" content="#060d18">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080d17">
+<title>J.A.R.V.I.S. — Mobile Test v0.3.1</title>
+<style>
+:root{color-scheme:dark;--bg:#080d17;--panel:#101a29;--panel2:#0d1421;--line:rgba(130,190,226,.18);--cyan:#68e3f2;--blue:#6b9dff;--text:#eaf4ff;--muted:#8395ad;--green:#60e5bb;--gold:#e8c77c;--danger:#ff8798;--radius:20px}
+*{box-sizing:border-box}.message a.btn{display:inline-block;margin-top:8px;text-decoration:none;text-align:center}#coreWrap{cursor:pointer;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}body{background:radial-gradient(ellipse at 50% -10%,rgba(48,105,158,.23),transparent 42%),var(--bg);min-height:100dvh}.app{max-width:720px;margin:0 auto;min-height:100dvh;padding:env(safe-area-inset-top) 16px calc(88px + env(safe-area-inset-bottom));position:relative}.topbar{display:flex;align-items:center;justify-content:space-between;padding:17px 2px 13px;border-bottom:1px solid var(--line)}.brand{display:flex;gap:11px;align-items:center}.brand-mark{height:39px;width:39px;border:1px solid rgba(104,227,242,.55);border-radius:13px;display:grid;place-items:center;color:var(--cyan);box-shadow:0 0 24px rgba(104,227,242,.12) inset;font-size:13px;font-weight:800;letter-spacing:.05em}.brand-title{font-size:15px;letter-spacing:.18em;font-weight:800}.brand-sub{font-size:9px;color:var(--muted);letter-spacing:.16em;margin-top:3px}.status{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:10px;letter-spacing:.09em;text-transform:uppercase}.dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px currentColor}.dot.online{background:var(--green);color:var(--green)}.eyebrow{font-size:10px;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;font-weight:700}.hero{text-align:center;padding:17px 0 2px}.hero h1{font-size:22px;letter-spacing:.08em;font-weight:650;margin:8px 0 5px}.hero p{font-size:12px;color:var(--muted);margin:0}.core-wrap{height:208px;display:grid;place-items:center;position:relative;margin:3px 0 2px}.core-wrap:before,.core-wrap:after{content:"";position:absolute;border:1px solid rgba(104,227,242,.12);border-radius:50%;width:185px;height:185px}.core-wrap:after{width:155px;height:155px;border-style:dashed;animation:spin 25s linear infinite}.core{height:126px;width:126px;border-radius:50%;position:relative;display:grid;place-items:center;background:radial-gradient(circle at 50% 44%,rgba(101,225,247,.24),rgba(38,92,151,.15) 38%,rgba(6,14,29,.72) 71%);border:1px solid rgba(107,218,247,.72);box-shadow:0 0 18px rgba(77,203,243,.18),inset 0 0 22px rgba(78,186,244,.17);z-index:1;animation:corebreath 4s ease-in-out infinite}.core:before{content:"";position:absolute;inset:11px;border-radius:50%;border:1px solid rgba(105,205,255,.26)}.core svg{width:67px;height:67px;filter:drop-shadow(0 0 8px rgba(104,227,242,.6))}.core-bars{position:absolute;bottom:-14px;display:flex;align-items:center;gap:4px;height:17px}.core-bars i{display:block;width:3px;border-radius:2px;background:var(--cyan);height:5px;opacity:.8}.core-bars i:nth-child(2n){height:11px}.core-bars i:nth-child(3n){height:15px}.is-thinking .core{animation:thinking .75s ease-in-out infinite alternate}.is-speaking .core{animation:speak .45s ease-in-out infinite alternate}.is-listening .core{box-shadow:0 0 42px rgba(96,229,187,.45),inset 0 0 28px rgba(96,229,187,.24);border-color:var(--green)}@keyframes spin{to{transform:rotate(360deg)}}@keyframes corebreath{0%,100%{transform:scale(1);box-shadow:0 0 18px rgba(77,203,243,.18),inset 0 0 22px rgba(78,186,244,.17)}50%{transform:scale(1.025);box-shadow:0 0 34px rgba(77,203,243,.28),inset 0 0 26px rgba(78,186,244,.24)}}@keyframes thinking{to{transform:scale(1.07);filter:hue-rotate(20deg)}}@keyframes speak{to{transform:scale(1.04);box-shadow:0 0 38px rgba(104,227,242,.38)}}.state-line{color:var(--cyan);font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:-3px}.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:17px 0 16px}.quick{min-height:68px;text-align:left;padding:12px 13px;border:1px solid var(--line);background:linear-gradient(135deg,rgba(19,34,54,.93),rgba(12,19,31,.95));border-radius:15px;color:var(--text);font:inherit;cursor:pointer;transition:border-color .2s,transform .2s}.quick:active{transform:scale(.98)}.quick .qicon{color:var(--cyan);font-size:15px;display:block;margin-bottom:7px}.quick strong{font-size:12px;font-weight:600;display:block}.quick small{color:var(--muted);font-size:10px;display:block;margin-top:3px}.panel{border:1px solid var(--line);background:linear-gradient(145deg,rgba(17,28,45,.95),rgba(11,18,30,.96));border-radius:var(--radius);padding:15px;margin:12px 0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.panel-head h2{font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin:0;font-weight:700}.pill{font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:30px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}.pill.good{color:var(--green);border-color:rgba(96,229,187,.3)}.summary-row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid rgba(130,190,226,.09);font-size:12px}.summary-row span{color:var(--muted)}.summary-row strong{font-weight:600;text-align:right}.view{display:none}.view.active{display:block}.section-head{padding:19px 3px 8px}.section-head h2{margin:0 0 6px;font-size:22px}.section-head p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.memory-item{padding:12px;border-radius:14px;background:rgba(5,12,22,.45);border:1px solid rgba(130,190,226,.11);margin:8px 0;display:flex;gap:11px;align-items:flex-start}.memory-icon{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;color:var(--cyan);background:rgba(104,227,242,.09);flex:none}.memory-body{flex:1;min-width:0}.memory-body strong{font-size:12px;display:block;margin:1px 0 4px}.memory-body p{font-size:11px;line-height:1.5;color:var(--muted);margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.memory-delete{background:transparent;border:0;color:#72839a;font-size:17px;padding:1px 5px;cursor:pointer}.btn{border:1px solid rgba(104,227,242,.28);border-radius:12px;background:rgba(104,227,242,.09);color:var(--cyan);font:inherit;font-size:12px;font-weight:650;padding:11px 13px;cursor:pointer}.btn.primary{background:linear-gradient(110deg,#66d8e9,#82d9ff);color:#07111d;border:0}.btn.subtle{background:rgba(255,255,255,.035);border-color:var(--line);color:var(--text)}.btn.danger{border-color:rgba(255,135,152,.3);background:rgba(255,135,152,.07);color:var(--danger)}.btn.full{width:100%}.btn:disabled{opacity:.4;cursor:not-allowed}.field{display:flex;flex-direction:column;gap:7px;margin:13px 0}.field label{font-size:11px;color:var(--muted);letter-spacing:.04em}.field input,.field textarea,.field select,.chat-input{width:100%;border:1px solid rgba(130,190,226,.2);background:#080f1b;color:var(--text);padding:12px;border-radius:12px;font:inherit;font-size:13px;outline:none}.field input:focus,.field textarea:focus,.chat-input:focus{border-color:rgba(104,227,242,.6)}.field textarea{min-height:80px;resize:vertical;line-height:1.45}.small-note{font-size:10px;line-height:1.55;color:var(--muted)}.warning{border-left:2px solid var(--gold);padding:10px 11px;background:rgba(232,199,124,.06);color:#d9c99e;font-size:10px;line-height:1.55;border-radius:0 9px 9px 0}.secure-context-banner{margin:10px 0 2px;padding:11px 13px;border:1px solid rgba(232,199,124,.28);border-left:3px solid var(--gold);border-radius:12px;background:rgba(232,199,124,.07);font-size:11px;line-height:1.5}.secure-context-banner strong{display:block;font-size:12px;margin-bottom:3px;color:#f1dca5}.secure-context-banner span{display:block;color:#d9c99e}.secure-context-banner.insecure{border-color:rgba(255,135,152,.55);border-left-color:var(--danger);background:rgba(255,135,152,.12)}.secure-context-banner.insecure strong{color:var(--danger)}.secure-context-banner.insecure span{color:#ffd1d8}.secure-context-banner.secure{border-color:rgba(96,229,187,.28);border-left-color:var(--green);background:rgba(96,229,187,.06)}.secure-context-banner.secure strong{color:var(--green)}.secure-context-banner.secure span{color:#b6d8d0}.secure-context-banner.unknown{border-color:rgba(130,190,226,.24);border-left-color:var(--muted);background:rgba(130,190,226,.05)}.secure-context-banner.unknown strong{color:var(--text)}.secure-context-banner.unknown span{color:var(--muted)}.button-row{display:flex;gap:8px;flex-wrap:wrap}.button-row .btn{flex:1}.chat-head{display:flex;align-items:center;justify-content:space-between;margin:16px 1px 10px}.chat-head h2{font-size:12px;letter-spacing:.1em;margin:0;text-transform:uppercase}.messages{display:flex;flex-direction:column;gap:12px;max-height:45dvh;overflow:auto;padding:5px 1px 13px;scrollbar-width:thin;scrollbar-color:#263c54 transparent}.message{max-width:89%;border-radius:16px;padding:11px 13px;font-size:12px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}.message.user{align-self:flex-end;background:linear-gradient(135deg,rgba(38,81,124,.72),rgba(28,48,75,.82));border:1px solid rgba(107,157,255,.23);border-bottom-right-radius:5px}.message.assistant{align-self:flex-start;background:rgba(17,29,46,.95);border:1px solid var(--line);border-bottom-left-radius:5px}.message .sender{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:5px;font-weight:750}.message.user .sender{color:#a9c9ff}.typing{display:inline-flex;gap:4px;padding:3px}.typing span{height:5px;width:5px;background:var(--cyan);border-radius:50%;animation:blink .9s infinite alternate}.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}@keyframes blink{to{opacity:.2;transform:translateY(-2px)}}.composer{position:sticky;bottom:82px;background:rgba(8,13,23,.96);padding:10px 0 9px;z-index:4;border-top:1px solid var(--line);backdrop-filter:blur(14px)}.composer-wrap{display:flex;align-items:center;gap:7px}.chat-input{flex:1;min-width:0;padding:13px 12px;border-radius:14px}.round-btn{width:43px;height:43px;border-radius:14px;border:1px solid var(--line);background:#111d2d;color:var(--cyan);font-size:17px;display:grid;place-items:center;flex:none;cursor:pointer}.round-btn.send{background:var(--cyan);color:#06111a;border-color:var(--cyan)}.round-btn.record{color:var(--green)}.round-btn.record.active{background:rgba(96,229,187,.15);border-color:var(--green);box-shadow:0 0 15px rgba(96,229,187,.16)}.composer-note{font-size:9px;color:var(--muted);padding:7px 2px 0}.tabbar{position:fixed;z-index:10;bottom:0;left:50%;transform:translateX(-50%);width:min(720px,100%);padding:9px 12px calc(9px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);gap:7px;background:rgba(8,13,23,.94);border-top:1px solid var(--line);backdrop-filter:blur(16px)}.tab{border:0;color:#7f91a9;background:transparent;border-radius:12px;padding:8px 5px;display:flex;flex-direction:column;gap:4px;align-items:center;font:inherit;cursor:pointer}.tab .tab-icon{font-size:18px}.tab small{font-size:9px;letter-spacing:.08em;text-transform:uppercase}.tab.active{color:var(--cyan);background:rgba(104,227,242,.08)}.toast{position:fixed;z-index:50;bottom:92px;left:50%;transform:translate(-50%,14px);opacity:0;pointer-events:none;background:#15253a;border:1px solid var(--line);color:var(--text);border-radius:12px;padding:11px 14px;font-size:11px;max-width:calc(100% - 28px);transition:.25s;box-shadow:0 8px 30px #0006}.toast.show{opacity:1;transform:translate(-50%,0)}.inline-status{font-size:11px;margin-top:8px;color:var(--muted);line-height:1.5}
+.diagnostic-box{margin-top:11px;padding:12px;border-radius:11px;border:1px solid var(--line);background:rgba(7,14,24,.78);font-size:11px;line-height:1.55;overflow-wrap:anywhere}
+.diagnostic-box.success{border-color:rgba(96,229,187,.45);background:rgba(96,229,187,.06)}
+.diagnostic-box.error{border-color:rgba(255,135,152,.48);background:rgba(255,135,152,.06)}
+.diagnostic-box.warning{border-color:rgba(232,199,124,.4);background:rgba(232,199,124,.05)}
+.diagnostic-box strong{display:block;margin-bottom:6px;color:var(--text);font-size:12px}
+.diagnostic-box pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;color:var(--muted);max-height:260px;overflow:auto}
+.hidden{display:none!important}.divider{height:1px;background:var(--line);margin:14px 0}.footer-note{text-align:center;color:#586b83;font-size:9px;letter-spacing:.05em;padding:12px 0 0}@media(min-width:600px){.app{padding-left:24px;padding-right:24px}.core-wrap{height:220px}.messages{max-height:480px}.hero h1{font-size:25px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">J<span style="color:#fff">.</span></div><div><div class="brand-title">J.A.R.V.I.S.</div><div class="brand-sub">PERSONAL INTELLIGENCE SYSTEM</div></div></div>
+  <div class="status"><i class="dot" id="statusDot"></i><span id="statusText">DEMO-BEREIT</span></div>
+</header>
+<div class="secure-context-banner unknown" id="secureContextBanner" role="status" aria-live="polite">
+  <strong id="secureContextTitle">Sicherheitsstatus wird geprüft …</strong>
+  <span id="secureContextDetails">JARVIS prüft window.isSecureContext.</span>
+</div>
+
+<main>
+<section class="view active" id="view-home">
+  <div class="hero"><div class="eyebrow">MOBILE TEST v0.3.1 · KI + SPRACHE</div><h1>Guten Abend.</h1><p>Dein persönlicher Assistent — Schritt für Schritt aufgebaut.</p></div>
+  <div class="core-wrap" id="coreWrap" aria-label="JARVIS Systemstatus">
+    <div class="core"><svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><circle cx="50" cy="50" r="31" stroke="#8cecf9" stroke-width="1.4" opacity=".6"/><circle cx="50" cy="50" r="22" stroke="#74baff" stroke-width="1" opacity=".7"/><path d="M50 20 L50 37 M50 63 L50 80 M20 50 L37 50 M63 50 L80 50" stroke="#8cecf9" stroke-width="1.4"/><path d="M36 37 L43 44 M57 56 L64 63 M64 37 L57 44 M43 56 L36 63" stroke="#74baff" stroke-width="1.3"/><circle cx="50" cy="50" r="9" fill="#70e7f5" fill-opacity=".22" stroke="#a7f4ff" stroke-width="1.2"/><circle cx="50" cy="50" r="3" fill="#c4fbff"/><path d="M50 3 L50 13 M50 87 L50 97 M3 50 L13 50 M87 50 L97 50" stroke="#6ee3f2" stroke-width="1" opacity=".65"/></svg><div class="core-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  </div>
+  <div class="state-line" id="coreState">SYSTEM STANDBY</div><div class="small-note" style="text-align:center;margin-top:6px">Tippe auf den Kern und sprich</div>
+  <div class="quick-grid">
+    <button class="quick" data-prompt="Erkläre mir, was wir in der mobilen JARVIS-Version bereits testen können und was noch fehlt."><span class="qicon">◈</span><strong>Systemstatus</strong><small>Stand und nächste Schritte</small></button>
+    <button class="quick" data-prompt="Fasse unseren gespeicherten JARVIS-Projektplan zusammen. Nenne Fakten, offene Punkte und Risiken getrennt."><span class="qicon">⌘</span><strong>Projektwissen</strong><small>Plan und Prioritäten</small></button>
+    <button class="quick" data-prompt="Hilf mir, JARVIS auf dem Handy zu testen. Gib mir einen konkreten ersten Test."><span class="qicon">◎</span><strong>Test starten</strong><small>Eine Aufgabe ausprobieren</small></button>
+    <button class="quick" data-prompt="Wie übertragen wir später meine mobilen JARVIS-Daten sicher in die Windows-PC-Version, ohne vorhandene Dateien zu überschreiben?"><span class="qicon">⇄</span><strong>PC-Verbindung</strong><small>Daten sicher übernehmen</small></button>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h2>Systemübersicht</h2><span class="pill" id="modePill">Lokale Demo</span></div>
+    <div class="summary-row"><span>KI-Verbindung</span><strong id="aiStatus">Noch nicht verbunden</strong></div>
+    <div class="summary-row"><span>Sprachkanal</span><strong id="voiceStatus">Browser-Unterstützung prüfen</strong></div>
+    <div class="summary-row"><span>Gedächtnis</span><strong id="memoryCount">3 Projektpunkte</strong></div>
+    <div class="summary-row"><span>Windows-PC</span><strong>Unverändert · getrennt</strong></div>
+  </div>
+  <div class="panel"><div class="panel-head"><h2>Wichtige Leitlinie</h2><span class="pill good">Gesichert</span></div><div class="small-note" style="font-size:11px">Diese Testversion arbeitet getrennt von deinem bestehenden PC-JARVIS. Sie steuert deinen PC nicht und überschreibt keine Dateien. Gespeicherte Projektinfos und Gespräche kannst du später als JSON exportieren und gezielt übernehmen.</div></div>
+</section>
+
+<section class="view" id="view-chat">
+  <div class="section-head"><div class="eyebrow">Kommunikationskanal</div><h2>Gespräch</h2><p>Tippen oder Spracheingabe verwenden. Ohne KI-Schlüssel antwortet die Testversion im klar gekennzeichneten Demo-Modus.</p></div>
+  <div class="chat-head"><h2>Gesprächsverlauf</h2><button class="btn subtle" id="clearChat" style="padding:7px 10px;font-size:10px">Verlauf löschen</button></div>
+  <div class="messages" id="messages" aria-live="polite"></div>
+  <div class="composer">
+    <div class="composer-wrap"><button class="round-btn record" id="micBtn" aria-label="Spracheingabe starten" title="Spracheingabe">◎</button><input class="chat-input" id="chatInput" placeholder="Nachricht an JARVIS…" autocomplete="off"><button class="round-btn send" id="sendBtn" aria-label="Nachricht senden">➤</button></div>
+    <div class="composer-note" id="composerNote">Demo-Modus aktiv · Verbinde Gemini in den Systemeinstellungen für echte KI-Antworten.</div>
+  </div>
+</section>
+
+<section class="view" id="view-memory">
+  <div class="section-head"><div class="eyebrow">Projektkontext</div><h2>Gedächtnis</h2><p>Diese Daten bleiben zunächst in diesem Browser. Exportiere sie regelmäßig, damit wir sie später kontrolliert in die PC-Version übernehmen können.</p></div>
+  <div class="panel"><div class="panel-head"><h2>Gespeicherte Informationen</h2><span class="pill" id="memoryPill">3 Einträge</span></div><div id="memoryList"></div></div>
+  <div class="panel"><div class="panel-head"><h2>Neuen Projektpunkt speichern</h2><span class="pill">Lokal</span></div><div class="field"><label for="memoryTitle">Titel</label><input id="memoryTitle" maxlength="90" placeholder="z. B. Nächster Entwicklungsschritt"></div><div class="field"><label for="memoryText">Inhalt</label><textarea id="memoryText" maxlength="2000" placeholder="Welche Information soll JARVIS später wiederverwenden?"></textarea></div><button class="btn primary full" id="addMemory">+ Im Gedächtnis speichern</button></div>
+  <div class="panel"><div class="panel-head"><h2>Datenübernahme</h2><span class="pill good">Import / Export</span></div><p class="small-note">Export enthält Projektprofil, gespeicherte Informationen und den Chatverlauf. Dein Gemini-API-Schlüssel wird niemals exportiert.</p><div class="button-row" style="margin-top:12px"><button class="btn primary" id="exportData">Daten exportieren</button><button class="btn subtle" id="importTrigger">Backup importieren</button></div><input id="importFile" type="file" accept=".json,application/json" class="hidden"><div class="inline-status" id="dataStatus"></div></div>
+</section>
+
+<section class="view" id="view-settings">
+  <div class="section-head"><div class="eyebrow">Konfiguration</div><h2>System</h2><p>KI-Anbieter und Sprachkanal getrennt testen. Diese mobile Version bleibt unabhängig vom Windows-JARVIS.</p></div>
+  <div class="panel"><div class="panel-head"><h2>KI-Verbindung</h2><span class="pill" id="connectionPill">Nicht verbunden</span></div>
+    <div class="field"><label for="aiProvider">KI-Anbieter auswählen</label><select id="aiProvider"><option value="ollama-cloud">Ollama Cloud API · Starterkontingent möglich</option><option value="gemini">Google Gemini API · begrenzter Gratis-Tarif möglich</option><option value="ollama">Ollama lokal · eigener Server nötig</option></select></div>
+    <div id="geminiSettings">
+      <div class="warning">Gemini kann einen kostenlosen API-Tarif haben, aber mit Kontingent- und Modellgrenzen. Der Schlüssel wird direkt vom Browser an Google gesendet und ist daher weniger geschützt als auf einem Server. Nur einen geeigneten Testschlüssel verwenden.</div>
+      <div class="field"><label for="apiKey">Gemini-API-Schlüssel · nur für diese Sitzung</label><input type="password" id="apiKey" autocomplete="off" placeholder="Google AI Studio API-Schlüssel"><div class="small-note">Wird nicht dauerhaft gespeichert und nicht exportiert. Beim Neuladen neu eingeben. Einen Schlüssel nicht in einem öffentlichen Screenshot teilen.</div></div>
+      <div class="field"><label for="modelName">Gemini-Modell</label><input id="modelName" value="gemini-3.1-flash-lite" autocomplete="off"><div class="small-note">Voreinstellung laut aktueller Google-Modellübersicht; tatsächlicher Zugriff und kostenloses Kontingent hängen vom Projekt ab.</div></div>
+    </div>
+    <div id="ollamaCloudSettings" class="hidden">
+      <div class="warning">Sicherer Cloud-Modus: Der Browser ruft Ollama nicht direkt auf. Stattdessen wird ein eigener HTTPS-Worker als Zwischenstelle verwendet; der Ollama-Schlüssel wird dort als Secret gespeichert, nicht in dieser Webseite. Das vermeidet typische direkte Browser-CORS-Probleme und hält den Schlüssel aus dem HTML heraus. Ollamas Gratis-Kontingent bleibt begrenzt.</div>
+      <div class="field"><label for="ollamaProxyUrl">HTTPS-Adresse des Ollama-Zwischendienstes</label><input id="ollamaProxyUrl" inputmode="url" autocomplete="url" placeholder="https://dein-worker.dein-name.workers.dev"><div class="small-note">Diese Adresse erhältst du, wenn du den beigelegten Worker veröffentlichst. Nur die Basisadresse eintragen, nicht /api/chat. Verwende ausschließlich eine HTTPS-Adresse.</div></div>
+      <div class="field"><label for="ollamaProxyToken">JARVIS-Proxy-Zugangscode</label><input id="ollamaProxyToken" type="password" autocomplete="off" placeholder="Eigener langer Zugangscode"><div class="small-note">Lege einen eigenen langen Zufallscode fest und trage denselben Code als Worker-Secret JARVIS_PROXY_TOKEN ein. Nur während dieser Sitzung im Browser eingeben. Nicht hier im Chat teilen.</div></div>
+      <div class="field"><label for="ollamaCloudModel">Cloud-Modellname</label><input id="ollamaCloudModel" autocomplete="off" value="gemma4:31b" placeholder="z. B. gemma4:31b"><div class="small-note">Modellname muss für deinen Ollama-Cloud-Zugang verfügbar sein. Verfügbarkeit und Gratis-Kontingent hängen vom Konto ab.</div></div>
+      <p class="small-note">Der Worker braucht zwei Secrets (OLLAMA_API_KEY und JARVIS_PROXY_TOKEN) sowie die Textvariable ALLOWED_ORIGIN mit der exakten HTTPS-Adresse dieser JARVIS-Webseite. Die Anleitung ist in der ZIP-Datei enthalten.</p>
+    </div>
+    <div id="ollamaSettings" class="hidden">
+      <div class="warning">Ollama lokal kostet für die lokale Modellnutzung nichts, benötigt aber einen laufenden Server und ein installiertes Modell. Eine reine Browserseite erzeugt keinen Ollama-Server. Auf Android zeigt 127.0.0.1 auf das Handy, nicht auf deinen Windows-PC. Bei einer HTTPS-Webseite blockiert der Browser oft direkte HTTP-Aufrufe. Für eine sichere Verbindung braucht es später einen erreichbaren HTTPS-Endpunkt mit passender CORS-Konfiguration.</div>
+      <div class="field"><label for="ollamaUrl">Ollama-Serveradresse</label><input id="ollamaUrl" inputmode="url" autocomplete="url" placeholder="https://dein-sicherer-ollama-endpunkt.example"><div class="small-note">Nur eine erreichbare Server-Basisadresse eintragen, nicht /api/chat. Niemals den Ollama-Port offen ins Internet stellen. Ohne laufenden Server kann der Test nicht erfolgreich sein.</div></div>
+      <div class="field"><label for="ollamaModel">Exakter Modellname auf dem Ollama-Server</label><input id="ollamaModel" autocomplete="off" placeholder="z. B. qwen3:4b — nur wenn installiert"><div class="small-note">Der Modellname muss exakt mit dem auf dem Server installierten Modell übereinstimmen; hier wird kein Modell automatisch installiert.</div></div>
+    </div>
+    <div class="button-row"><button class="btn primary" id="testConnection">Gemini-Verbindung testen</button><button class="btn subtle" id="disconnect">Verbindung trennen</button></div><div class="inline-status" id="connectionMessage" aria-live="polite"></div>
+    <div class="diagnostic-box hidden" id="geminiDiagnostics" role="status" aria-live="polite"><strong id="geminiDiagnosticsTitle">KI-Diagnose</strong><pre id="geminiDiagnosticsBody"></pre></div>
+  </div>
+  <div class="panel"><div class="panel-head"><h2>Sprache</h2><span class="pill" id="speechPill">Systemstandard</span></div><label style="display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;padding:6px 0"><span>Antworten automatisch vorlesen</span><input type="checkbox" id="autoSpeak" style="width:18px;height:18px;accent-color:#68e3f2"></label><div class="field"><label for="voiceSelect">Deutsche Stimme</label><select id="voiceSelect"><option value="">Systemstandard (Deutsch)</option></select></div><button class="btn subtle full" id="testVoice">Sprachausgabe testen</button><p class="small-note" style="margin-top:10px">Spracherkennung und verfügbare Stimmen hängen vom Browser und Android ab. In dieser Testversion nutzen wir die Sprachfunktionen des Geräts, nicht dauerhaftes Echtzeit-Audio.</p>
+    <div class="button-row" style="margin:10px 0"><button class="btn subtle full" id="testMicPermission">Mikrofonberechtigung / Hardware prüfen</button></div><div class="diagnostic-box warning" id="voiceDiagnostics" role="status" aria-live="polite"><strong>Sprachtest noch nicht ausgeführt</strong><pre>Erst Mikrofonzugriff prüfen, danach im Gespräch das Mikrofon-Symbol testen. Eine erkannte Browser-API allein beweist nicht, dass Sprache erkannt wird.</pre></div></div>
+  <div class="panel"><div class="panel-head"><h2>Über diese Version</h2><span class="pill">v0.4.0</span></div><div class="summary-row"><span>Modus</span><strong>Mobile Web-Testversion v0.4.0</strong></div><div class="summary-row"><span>Speicherung</span><strong>Browser lokal</strong></div><div class="summary-row"><span>PC-Zugriff</span><strong>Nicht aktiviert</strong></div><div class="summary-row"><span>Live-Audio / Aktionen</span><strong>Noch nicht implementiert</strong></div></div>
+</section>
+</main>
+<div class="footer-note">J.A.R.V.I.S. MOBILE PROTOTYPE · NICHT MIT DEM PC-PROJEKT VERBUNDEN</div>
+</div>
+<nav class="tabbar" aria-label="Hauptnavigation"><button class="tab active" data-view="home"><span class="tab-icon">⌂</span><small>Start</small></button><button class="tab" data-view="chat"><span class="tab-icon">◌</span><small>Gespräch</small></button><button class="tab" data-view="memory"><span class="tab-icon">⌘</span><small>Gedächtnis</small></button><button class="tab" data-view="settings"><span class="tab-icon">⚙</span><small>System</small></button></nav>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(() => {
+  'use strict';
+  const STORAGE = 'jarvis_mobile_v01';
+  const PROJECT_PROFILE = {
+    name: 'J.A.R.V.I.S. Mobile Prototype',
+    version: '0.1',
+    purpose: 'Eine eigenständige Testversion für das Android-Handy. Bewährte Module und explizit exportierte Daten sollen später kontrolliert in das vorhandene Windows-JARVIS übernommen werden.',
+    constraints: [
+      'Das bestehende Windows-PC-JARVIS nicht überschreiben oder unnötig neu schreiben.',
+      'Vor größeren Änderungen Backups erstellen und neue Funktionen modular halten.',
+      'Gemini ist der geplante primäre KI-Anbieter; später geschützter API-Aufruf über einen PC-Server.',
+      'Klare natürliche deutsche Sprachausgabe und Sprachinteraktion priorisieren.',
+      'Keine PC-Aktionen ohne ausdrückliche Bestätigung; diese mobile Testversion hat keinerlei PC-Steuerung.',
+      'Fakten, Annahmen, Prognosen und offene Fragen voneinander trennen; keine Ergebnisse erfinden.'
+    ]
+  };
+  const initialMemories = [
+    {id:'core-no-overwrite',title:'Bestehendes PC-JARVIS schützen',text:'Die mobile Testversion bleibt getrennt. Bestehende PC-Dateien nicht überschreiben und nicht unnötig neu anfangen. Erst sichern, dann modular integrieren.',createdAt:'2026-10-25T00:00:00.000Z',pinned:true},
+    {id:'core-voice',title:'Priorität: Sprachkanal',text:'Als nächstes die Sprachinteraktion verbessern: klare natürliche deutsche Stimme, verlässliche Spracheingabe und sichtbare Zustände für Zuhören, Denken und Sprechen.',createdAt:'2026-10-25T00:00:00.000Z',pinned:true},
+    {id:'core-context',title:'Projektkontext exportierbar halten',text:'Wichtige JARVIS-Entscheidungen als Daten exportieren. Beim späteren PC-Import prüfen, zusammenführen und nicht blind vorhandene Projektdateien ersetzen.',createdAt:'2026-10-25T00:00:00.000Z',pinned:true}
+  ];
+  const defaultState = {memories:initialMemories,messages:[],autoSpeak:true,voiceURI:''};
+  let appState = loadState();
+  let geminiKey = '';
+  let aiConnected = false;
+  let connectedProvider = '';
+  let recognition = null;
+  let isThinking = false;
+  let voices = [];
+  let toastTimer = null;
+  const $ = id => document.getElementById(id);
+
+  function loadState(){
+    try { const saved = JSON.parse(localStorage.getItem(STORAGE) || 'null'); if(saved && typeof saved === 'object') return {...defaultState,...saved,memories:Array.isArray(saved.memories)?saved.memories:initialMemories,messages:Array.isArray(saved.messages)?saved.messages:[]}; }
+    catch(e) { console.warn('JARVIS: lokale Daten konnten nicht gelesen werden.', e); }
+    return structuredClone(defaultState);
+  }
+  function persist(){ try { localStorage.setItem(STORAGE, JSON.stringify(appState)); } catch(e) { toast('Browser-Speicher voll. Bitte Daten exportieren.'); } }
+  function esc(s){ return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+  function toast(message){ const el=$('toast'); el.textContent=message; el.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>el.classList.remove('show'),2800); }
+  function checkSecureContext(){
+    const value = typeof window.isSecureContext === 'boolean' ? window.isSecureContext : null;
+    const banner = $('secureContextBanner');
+    banner.classList.remove('secure','insecure','unknown');
+    if(value === false){
+      banner.classList.add('insecure');
+      $('secureContextTitle').textContent = 'Mikrofon braucht HTTPS';
+      $('secureContextDetails').textContent = `window.isSecureContext = false (Adresse: ${location.protocol}). Für Mikrofonzugriff muss die veröffentlichte Seite über https:// geöffnet werden; normales http:// reicht nicht.`;
+    } else if(value === true){
+      banner.classList.add('secure');
+      $('secureContextTitle').textContent = 'Sicherer Kontext erkannt';
+      $('secureContextDetails').textContent = `window.isSecureContext = true (Protokoll: ${location.protocol}). Die HTTPS-Voraussetzung ist erfüllt. Falls Spracheingabe nicht funktioniert, prüfen wir als Nächstes Mikrofonberechtigung und SpeechRecognition-Unterstützung.`;
+    } else {
+      banner.classList.add('unknown');
+      $('secureContextTitle').textContent = 'Sicherheitsstatus nicht ermittelbar';
+      $('secureContextDetails').textContent = 'Dieser Browser stellt window.isSecureContext nicht als booleschen Wert bereit. Die Spracheingabe wird vorsichtshalber nicht gestartet.';
+    }
+    return value;
+  }
+  function setCore(state, label){ $('coreWrap').classList.remove('is-thinking','is-speaking','is-listening'); if(state) $('coreWrap').classList.add('is-'+state); $('coreState').textContent=label; }
+  function selectedProvider(){ return $('aiProvider')?.value || 'gemini'; }
+  function providerLabel(provider=selectedProvider()){ return provider === 'ollama-cloud' ? 'Ollama Cloud' : (provider === 'ollama' ? 'Ollama lokal' : 'Gemini'); }
+  function setConnected(connected, message){
+    aiConnected=!!connected;
+    connectedProvider=connected?selectedProvider():'';
+    const label=providerLabel();
+    $('statusDot').classList.toggle('online',!!connected);
+    $('statusText').textContent=connected?`${label.toUpperCase()} BEREIT`:(selectedProvider()==='gemini'&&geminiKey?'GEMINI NICHT BESTÄTIGT':'DEMO-BEREIT');
+    $('aiStatus').textContent=connected?`${label} verbunden`:'Noch nicht verbunden';
+    $('modePill').textContent=connected?`${label} verbunden`:'Lokale Demo';
+    $('connectionPill').textContent=connected?'Verbunden':'Nicht verbunden';
+    $('connectionMessage').textContent=message||'';
+    $('composerNote').textContent=connected?`${label} aktiv · Sprachfunktionen sind separat zu testen.`:'Demo-Modus aktiv · Wähle unter System einen KI-Anbieter und teste die Verbindung.';
+  }
+  function refreshProviderPanels(){
+    const provider=selectedProvider();
+    $('geminiSettings').classList.toggle('hidden',provider!=='gemini');
+    $('ollamaCloudSettings').classList.toggle('hidden',provider!=='ollama-cloud');
+    $('ollamaSettings').classList.toggle('hidden',provider!=='ollama');
+    $('testConnection').textContent=provider==='ollama'?'Lokale Ollama-Verbindung testen':(provider==='ollama-cloud'?'Ollama-Cloud-Verbindung testen':'Gemini-Verbindung testen');
+    setConnected(false,provider==='ollama'?'Ollama lokal ausgewählt, noch nicht verbunden.':(provider==='ollama-cloud'?'Ollama Cloud ausgewählt, noch nicht verbunden.':'Gemini ausgewählt, noch nicht verbunden.'));
+    $('geminiDiagnostics').classList.add('hidden');
+  }
+  $('aiProvider').addEventListener('change',refreshProviderPanels);
+  function selectView(name){ document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+name)); document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===name)); if(name==='chat') {renderMessages(); setTimeout(()=>$('chatInput').focus({preventScroll:true}),80);} if(name==='memory') renderMemories(); }
+  document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>selectView(b.dataset.view)));
+  document.querySelectorAll('.quick').forEach(b=>b.addEventListener('click',()=>{selectView('chat');$('chatInput').value=b.dataset.prompt;setTimeout(sendMessage,120);}));
+
+  function addMessage(role,text,meta={}){ const m={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),role,text:String(text),createdAt:new Date().toISOString(),...meta}; appState.messages.push(m); if(appState.messages.length>250) appState.messages=appState.messages.slice(-250); persist(); renderMessages(); return m; }
+  function renderMessages(){ const box=$('messages'); box.innerHTML=''; if(!appState.messages.length){ const intro=document.createElement('div'); intro.className='message assistant'; intro.innerHTML='<div class="sender">J.A.R.V.I.S.</div>System online. Ich bin bereit für deinen Test. Verbinde einen KI-Anbieter im Bereich „System“, um echte KI-Antworten zu aktivieren. Bis dahin antworte ich mit begrenztem Projekt-Demo-Wissen.'; box.appendChild(intro); return; }
+    appState.messages.slice(-80).forEach(m=>{const el=document.createElement('div');el.className='message '+(m.role==='user'?'user':'assistant');const sender=document.createElement('div');sender.className='sender';sender.textContent=m.role==='user'?'DU':'J.A.R.V.I.S.';const body=document.createElement('div');body.textContent=m.text;el.append(sender,body);if(Array.isArray(m.actions)&&m.actions.length){const row=document.createElement('div');row.className='button-row';m.actions.forEach(a=>{const u=safeUrl(a.url);if(!u)return;const link=document.createElement('a');link.className='btn subtle';link.textContent=a.label;link.href=u;link.target='_blank';link.rel='noopener noreferrer';row.appendChild(link);});el.appendChild(row);}box.appendChild(el);}); box.scrollTop=box.scrollHeight; }
+
+  const activeTimers=new Map();let timerSeq=0;
+  function beep(){try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const ctx=new C();[0,0.35,0.7].forEach(t=>{const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=880;g.gain.value=0.15;o.connect(g);g.connect(ctx.destination);o.start(ctx.currentTime+t);o.stop(ctx.currentTime+t+0.2);});}catch(e){}}
+  function fmtDur(sec){const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),x=sec%60,p=[];if(h)p.push(h+(h===1?' Stunde':' Stunden'));if(m)p.push(m+(m===1?' Minute':' Minuten'));if(x)p.push(x+(x===1?' Sekunde':' Sekunden'));return p.join(' ')||'0 Sekunden';}
+  function startTimer(sec,label){const id=++timerSeq;const h=setTimeout(()=>{activeTimers.delete(id);const msg=label?`Timer abgelaufen: ${label}.`:`Timer abgelaufen: ${fmtDur(sec)}.`;addMessage('assistant',msg,{mode:'local'});beep();if(navigator.vibrate)navigator.vibrate([300,150,300,150,300]);toast(msg);if(appState.autoSpeak)speak(msg);},sec*1000);activeTimers.set(id,h);}
+  function parseNum(w){const map={ein:1,eine:1,einen:1,einer:1,zwei:2,drei:3,vier:4,fünf:5,fuenf:5,sechs:6,sieben:7,acht:8,neun:9,zehn:10,fünfzehn:15,zwanzig:20,dreißig:30,dreissig:30,vierzig:40,fünfundvierzig:45,sechzig:60};return /^\d+$/.test(w)?parseInt(w,10):(map[w]||null);}
+  function safeUrl(u){try{const x=new URL(u);return x.protocol==='https:'?x.toString():null;}catch(e){return null;}}
+  function localCommand(raw){
+    const t=raw.trim().toLowerCase().replace(/[.!?]+$/,'');
+    // Uhrzeit / Datum
+    if(/^(wie spät|wie viel uhr|wieviel uhr|sag mir die uhrzeit|uhrzeit)/.test(t)){const d=new Date();return{reply:`Es ist ${d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})} Uhr.`};}
+    if(/^(welcher tag|welches datum|welchen tag|datum|den wievielten)/.test(t)){return{reply:`Heute ist ${new Date().toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}.`};}
+    // Timer abbrechen
+    if(/(timer|wecker|erinnerung).*(abbrechen|stoppen|stopp|löschen|aus)|(stopp|stoppe|lösche|beende)\s+(den\s+)?timer/.test(t)){const n=activeTimers.size;activeTimers.forEach(h=>clearTimeout(h));activeTimers.clear();return{reply:n?`${n===1?'Der Timer wurde':'Die Timer wurden'} abgebrochen.`:'Es läuft gerade kein Timer.'};}
+    // Timer starten
+    let m=t.match(/(?:timer|stelle?\s+(?:einen\s+)?timer|erinnere mich)[^\d\wäöüß]*(?:für|auf|in)?\s*(\d+|ein|eine|einen|zwei|drei|vier|fünf|fuenf|sechs|sieben|acht|neun|zehn|fünfzehn|zwanzig|dreißig|dreissig|vierzig|fünfundvierzig|sechzig)\s*(sekunden?|sek|minuten?|min|stunden?|std)\b(?:\s+(?:an|daran|dass)\s+(.+))?/);
+    if(!m)m=t.match(/(?:in)\s*(\d+|ein|eine|einen|zwei|drei|vier|fünf|fuenf|sechs|sieben|acht|neun|zehn|fünfzehn|zwanzig|dreißig|dreissig|vierzig|fünfundvierzig|sechzig)\s*(sekunden?|sek|minuten?|min|stunden?|std)\b.*(?:erinnere|erinnerung|timer)(?:.*\ban\s+(.+))?/);
+    if(m){const n=parseNum(m[1]);if(n){const u=m[2];const mult=/^s/.test(u)?1:(/^(min)/.test(u)?60:3600);const sec=n*mult;if(sec>=1&&sec<=86400){const label=(m[3]||'').trim();startTimer(sec,label);return{reply:`Timer gestellt: ${fmtDur(sec)}${label?' für '+label:''}. Er läuft nur, solange diese Seite offen bleibt.`};}}}
+    // Links: Navigation, Suche, YouTube
+    let q;
+    if((q=t.match(/^(?:navigiere|route|wegbeschreibung|fahre|bring mich)\s*(?:mich\s*)?(?:nach|zu|zum|zur)\s+(.+)/))){const url=safeUrl('https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(q[1]));return{reply:`Route zu ${q[1]} bereit. Tippe auf den Knopf, um Google Maps zu öffnen.`,actions:[{label:'Route in Google Maps',url}]};}
+    if((q=t.match(/^(?:zeige|such|suche|finde)\s+(?:mir\s+)?(?:auf\s+(?:google\s+)?maps\s+)?(.+?)\s+(?:in der nähe|hier in der nähe|auf maps|auf google maps)$/))){const url=safeUrl('https://www.google.com/maps/search/'+encodeURIComponent(q[1]));return{reply:`Suche nach ${q[1]} bereit. Tippe auf den Knopf, um Google Maps zu öffnen.`,actions:[{label:'In Google Maps suchen',url}]};}
+    if((q=t.match(/^(?:youtube|spiel(?:e)?|suche auf youtube|such auf youtube)\s+(.+?)(?:\s+auf youtube)?$/))&&/youtube/.test(t)){const term=q[1].replace(/^youtube\s*/,'');const url=safeUrl('https://www.youtube.com/results?search_query='+encodeURIComponent(term));return{reply:`YouTube-Suche nach ${term} bereit. Tippe auf den Knopf.`,actions:[{label:'Auf YouTube suchen',url}]};}
+    if(/^öffne\s+youtube$/.test(t)){return{reply:'YouTube bereit. Tippe auf den Knopf.',actions:[{label:'YouTube öffnen',url:'https://www.youtube.com/'}]};}
+    if((q=t.match(/^(?:google|googel|suche im internet nach|such im internet nach|suche nach)\s+(.+)/))){const url=safeUrl('https://www.google.com/search?q='+encodeURIComponent(q[1]));return{reply:`Google-Suche nach ${q[1]} bereit. Tippe auf den Knopf.`,actions:[{label:'Bei Google suchen',url}]};}
+    return null;
+  }
+  function showTyping(){ const el=document.createElement('div');el.className='message assistant';el.id='typingMessage';el.innerHTML='<div class="sender">J.A.R.V.I.S.</div><div class="typing"><span></span><span></span><span></span></div>'; $('messages').appendChild(el);$('messages').scrollTop=$('messages').scrollHeight; }
+  function removeTyping(){const el=$('typingMessage');if(el)el.remove();}
+
+  function getContextBase(){const memory=appState.memories.map(m=>`- ${m.title}: ${m.text}`).join('\n');const constraints=PROJECT_PROFILE.constraints.map(x=>'- '+x).join('\n');return `Du bist J.A.R.V.I.S., ein technischer, verlässlicher Assistent. Antworte auf Deutsch, klar, freundlich und konkret. Erfinde keine Testergebnisse oder Fähigkeiten. Unterscheide bestätigte Fakten, Annahmen und offene Punkte. Behaupte nie, Zugriff auf den PC, das Mikrofon im Hintergrund oder Apps zu haben, wenn das nicht tatsächlich eingerichtet ist. Vor Aktionen mit möglichen Folgen ist ausdrückliche Bestätigung erforderlich.\n\nPROJEKTPROFIL:\n${PROJECT_PROFILE.purpose}\nVorgaben:\n${constraints}\n\nLOKALE PROJEKTERINNERUNGEN (vom Nutzer gespeichert):\n${memory || '(keine zusätzlichen Erinnerungen)'}\n\nWichtig: Du bist mit dieser mobilen Demo nicht direkt mit dem Windows-PC verbunden. Beschreibe Möglichkeiten als Planung, nicht als bereits ausgeführte Aktionen.`;}
+
+  function getContext(){
+    const now=new Date().toLocaleString('de-DE',{dateStyle:'full',timeStyle:'short'});
+    return getContextBase()+`\n\nSTIL (deine Antworten werden laut vorgelesen):\n- Kurz antworten, meist 1 bis 3 Sätze.\n- Kein Markdown, keine Sternchen, keine Aufzählungszeichen, keine Emojis.\n- Sprich den Nutzer, Menderes, locker an. Sagt er "Hallo Bruder", antworte "Selam aleykum Bruder".\n- Zuerst die Antwort, Details nur auf Nachfrage.\n\nWAS DU KANNST: chatten, Timer (läuft nur solange diese Seite offen ist), Links zu Google, YouTube und Google Maps anbieten, Uhrzeit nennen. Alles andere kannst du nicht: Galerie, Apps steuern, Anrufe, Hintergrundzugriff, PC. Sag das ehrlich, wenn danach gefragt wird.\nAKTUELL: ${now}.`;
+  }
+  function localDemoReply(q){const t=q.toLowerCase(); if(/status|was kann|testen|stand/.test(t)) return 'Mobile Testversion v0.5.0. Enthält Chat, lokale Projekterinnerungen, Datenexport/-import, Gemini-API, einen konfigurierbaren Ollama-Server sowie Browser-Sprachdiagnose. Echte KI-Antworten gibt es nur bei erreichbarem Anbieter. PC-Steuerung, dauerhaftes Echtzeit-Audio und Hintergrundzugriff sind nicht enthalten.';
+    if(/projekt|plan|priorit|gespeicher/.test(t)) return 'Unser Projektplan für diese Testphase:\n1. Mobile Oberfläche ausprobieren, ohne das Windows-Projekt anzufassen.\n2. KI-Verbindung über HTTPS und deutsche Sprachfunktionen testen.\n3. Entscheidungen/Erinnerungen und Chat als JSON exportieren.\n4. Beim PC-Import vorhandene Dateien sichern, Daten prüfen und Module gezielt integrieren.\n\nDie höchste Entwicklungspriorität bleibt ein verlässlicher Sprachkanal. Diese Demo ist noch kein vollständiger JARVIS.';
+    if(/pc|übertrag|daten|import|export/.test(t)) return 'Ja. Unter „Gedächtnis“ kannst du Projektinfos und den Chatverlauf als JSON exportieren. Diese Datei kann später als Importquelle für das PC-Projekt dienen. Der Import muss dann geprüft und zusammengeführt werden; er überschreibt nicht automatisch Dateien. Die übertragenen Daten liefern dem PC-Assistenten Kontext, trainieren das Gemini-Modell aber nicht neu.';
+    if(/sprache|stimme|mikro|sprechen|laut/.test(t)) return 'In dieser ersten Version verwenden wir die Sprachfunktionen, die dein Browser bereitstellt: Spracheingabe über das Mikrofonsymbol und Sprachausgabe über die Systemeinstellung. Welche Funktionen verfügbar sind, hängt von Android und Browser ab. Dauerhaftes, unterbrechungsfreies Echtzeit-Audio ist noch nicht eingebaut.';
+    if(/ollama/.test(t)) return 'Ollama kann lokal kostenlos laufen, braucht dafür aber einen gestarteten Ollama-Server und ein installiertes Modell. Diese Web-App kann kein Modell auf dem Handy installieren. Unter System kannst du eine erreichbare Ollama-Serveradresse und den installierten Modellnamen prüfen. 127.0.0.1 auf dem Handy bedeutet das Handy selbst, nicht den PC.';
+    if(/gemini|verbinden|api/.test(t)) return 'Öffne unten „System“ und wähle Google Gemini oder Ollama. Gemini benötigt einen API-Schlüssel und kann kostenlose, aber begrenzte Kontingente haben. Ollama ist für die lokale Nutzung kostenlos, benötigt jedoch einen laufenden Server. Wähle „Verbindung testen“, bevor du echte Antworten erwartest.';
+    return 'Ich bin aktuell im Demo-Modus und habe keinen KI-Dienst verbunden. Ich kann die lokalen Projektpunkte und den Exportablauf demonstrieren, aber nicht frei über Gemini nachdenken. Öffne „System“, um Gemini für diesen Prototyp zu testen, oder speichere deine Projektinfo unter „Gedächtnis“.'; }
+
+  class GeminiHttpError extends Error {
+    constructor(status, statusText, rawText, payload) {
+      const apiMessage = payload?.error?.message || payload?.message || '';
+      super(apiMessage || `HTTP ${status} ${statusText || ''}`.trim());
+      this.name = 'GeminiHttpError';
+      this.status = status;
+      this.statusText = statusText || '';
+      this.rawText = rawText || '';
+      this.payload = payload || null;
+    }
+  }
+  class GeminiNetworkError extends Error {
+    constructor(original) {
+      super(original?.message || 'Keine HTTP-Antwort erhalten.');
+      this.name = 'GeminiNetworkError';
+      this.originalName = original?.name || 'NetworkError';
+    }
+  }
+  class GeminiEmptyResponseError extends Error {
+    constructor(status, statusText, rawText, payload) {
+      super('Die Anfrage erreichte Gemini, aber die Antwort enthielt keinen lesbaren Text.');
+      this.name = 'GeminiEmptyResponseError';
+      this.status = status;
+      this.statusText = statusText || '';
+      this.rawText = rawText || '';
+      this.payload = payload || null;
+    }
+  }
+  function getModelName() {
+    return ($('modelName').value.trim() || 'gemini-3.1-flash-lite').replace(/^models\//, '');
+  }
+  function showGeminiDiagnostic(kind, title, details) {
+    const box = $('geminiDiagnostics');
+    if (!box) return;
+    box.classList.remove('hidden', 'success', 'error', 'warning');
+    box.classList.add(kind || 'warning');
+    $('geminiDiagnosticsTitle').textContent = title || 'Gemini-Diagnose';
+    $('geminiDiagnosticsBody').textContent = String(details || 'Keine weiteren Details erhalten.');
+  }
+  function formatGeminiError(error, model) {
+    const lines = [`Modell: ${model || getModelName()}`];
+    if (error && Number.isFinite(error.status)) {
+      lines.unshift(`HTTP-Status: ${error.status}${error.statusText ? ' ' + error.statusText : ''}`);
+      const apiStatus = error.payload?.error?.status || error.payload?.status;
+      const apiMessage = error.payload?.error?.message || error.payload?.message || error.message;
+      if (apiStatus) lines.push(`Gemini-Status: ${apiStatus}`);
+      if (apiMessage) lines.push(`API-Meldung: ${apiMessage}`);
+      if (error.rawText) lines.push(`Antworttext (max. 3500 Zeichen):
+${error.rawText.slice(0, 3500)}`);
+      if (error.status === 400) lines.push('Hinweis: Modellname, Anfrageformat oder Parameter prüfen.');
+      else if (error.status === 401) lines.push('Hinweis: API-Schlüssel fehlt, ist ungültig oder wurde abgelehnt.');
+      else if (error.status === 403) lines.push('Hinweis: Berechtigungen, Projektzugriff, Kontingent-/Abrechnungsstatus prüfen.');
+      else if (error.status === 404) lines.push('Hinweis: Modellname oder API-Endpunkt ist nicht verfügbar.');
+      else if (error.status === 429) lines.push('Hinweis: Kontingent oder Anfragerate erreicht.');
+      else if (error.status >= 500) lines.push('Hinweis: Serverfehler bei Google; später erneut versuchen.');
+    } else {
+      lines.unshift('HTTP-Status: keiner erhalten');
+      lines.push(`Fehlerart: ${error?.originalName || error?.name || 'Unbekannt'}`);
+      lines.push(`Fehlertext: ${error?.message || 'Die Anfrage konnte nicht abgeschlossen werden.'}`);
+      lines.push('Mögliche Ursachen: Internetverbindung, Browser-/CORS-Blockierung oder eine unterbrochene Verbindung. Da keine HTTP-Antwort vorliegt, lässt sich der API-Schlüssel daraus allein nicht beurteilen.');
+    }
+    return lines.join('\n');
+  }
+  async function requestGemini(model, body) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`;
+    let response;
+    try {
+      response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiKey },
+        body: JSON.stringify(body)
+      });
+    } catch (error) {
+      throw new GeminiNetworkError(error);
+    }
+    let rawText = '';
+    try { rawText = await response.text(); } catch (error) { rawText = `Antworttext konnte nicht gelesen werden: ${error?.message || error}`; }
+    let payload = null;
+    try { payload = rawText ? JSON.parse(rawText) : null; } catch (error) { payload = null; }
+    if (!response.ok) throw new GeminiHttpError(response.status, response.statusText, rawText, payload);
+    return { response, rawText, payload };
+  }
+  function textFromGemini(payload, response, rawText) {
+    const text = payload?.candidates?.[0]?.content?.parts?.map(part => part.text || '').join('').trim();
+    if (!text) throw new GeminiEmptyResponseError(response.status, response.statusText, rawText, payload);
+    return text;
+  }
+  async function callGemini() {
+    const model = getModelName();
+    const history = appState.messages.slice(-16).map(message => ({
+      role: message.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: message.text }]
+    }));
+    const result = await requestGemini(model, {
+      systemInstruction: { parts: [{ text: getContext() }] },
+      contents: history,
+      generationConfig: { temperature: 0.65, maxOutputTokens: 1200 }
+    });
+    return textFromGemini(result.payload, result.response, result.rawText);
+  }
+  function getOllamaUrl(){
+    const raw=$('ollamaUrl').value.trim();
+    if(!raw) throw new Error('Bitte eine erreichbare Ollama-Serveradresse eintragen.');
+    let url;
+    try { url=new URL(raw); } catch { throw new Error('Ollama-Serveradresse ist ungültig. Eine vollständige Adresse mit http:// oder https:// eingeben.'); }
+    if(!['http:','https:'].includes(url.protocol)) throw new Error('Ollama-Serveradresse muss mit http:// oder https:// beginnen.');
+    if(window.location.protocol==='https:'&&url.protocol==='http:'&&!['localhost','127.0.0.1','[::1]'].includes(url.hostname)) throw new Error('HTTPS-Sicherheitsblock: Die App läuft über HTTPS, aber die Ollama-Adresse über HTTP. Benötigt wird ein sicherer HTTPS-Endpunkt oder eine dafür geeignete lokale App.');
+    url.hash='';url.search='';url.pathname=url.pathname.replace(/\/+$/,'').replace(/\/api\/chat$/,'');
+    return url.toString().replace(/\/$/,'')+'/api/chat';
+  }
+  function getOllamaModel(){return $('ollamaModel').value.trim();}
+  function getOllamaCloudProxyUrl(){
+    const raw=$('ollamaProxyUrl').value.trim();
+    if(!raw) throw new Error('Bitte zuerst die HTTPS-Adresse des Ollama-Zwischendienstes eintragen. Es wurde keine Anfrage gesendet.');
+    let url; try { url=new URL(raw); } catch { throw new Error('Die Proxy-Adresse ist ungültig. Bitte die vollständige HTTPS-Adresse des veröffentlichten Workers eintragen.'); }
+    if(url.protocol!=='https:') throw new Error('Der Ollama-Zwischendienst muss über HTTPS erreichbar sein. Es wurde keine Anfrage gesendet.');
+    if(url.username||url.password) throw new Error('Die Proxy-Adresse darf keine Zugangsdaten enthalten.');
+    url.hash='';url.search='';url.pathname=url.pathname.replace(/\/+$/,'').replace(/\/api\/chat$/,'');
+    return url.toString().replace(/\/$/,'')+'/api/chat';
+  }
+  function getOllamaCloudModel(){return $('ollamaCloudModel').value.trim();}
+  function getSelectedOllamaModel(){return selectedProvider()==='ollama-cloud'?getOllamaCloudModel():getOllamaModel();}
+  async function requestOllama(body){
+    const cloud=selectedProvider()==='ollama-cloud';
+    const url=cloud?getOllamaCloudProxyUrl():getOllamaUrl();
+    const headers={'Content-Type':'application/json'};
+    if(cloud){const proxyToken=$('ollamaProxyToken').value.trim();if(!proxyToken)throw new Error('Bitte den eigenen JARVIS-Proxy-Zugangscode eintragen. Es wurde keine Anfrage gesendet.');headers['X-JARVIS-Proxy-Token']=proxyToken;}
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);let response;
+    try{response=await fetch(url,{method:'POST',headers,body:JSON.stringify(body),signal:controller.signal});}
+    catch(error){const reason=error?.name==='AbortError'?'Zeitüberschreitung nach 30 Sekunden.':'Keine HTTP-Antwort erhalten ('+(error?.name||'Netzwerkfehler')+'): '+(error?.message||'unbekannt');const hint=cloud?'Prüfe Worker-URL, ALLOWED_ORIGIN, Worker-Secrets und Internetverbindung.':'Prüfe, ob Ollama läuft, die Serveradresse erreichbar ist und CORS/HTTPS die Browseranfrage erlauben. Auf Android ist 127.0.0.1 das Handy selbst, nicht der Windows-PC.';throw new Error(reason+' '+hint);}
+    finally{clearTimeout(timer);}
+    const rawText=await response.text().catch(()=> 'Antworttext konnte nicht gelesen werden.');let payload=null;try{payload=rawText?JSON.parse(rawText):null;}catch{}
+    if(!response.ok){const e=new Error(`HTTP ${response.status} ${response.statusText||''}: ${payload?.error||rawText||'Ollama-Anfrage abgelehnt'}`);e.status=response.status;e.statusText=response.statusText;e.rawText=rawText;e.payload=payload;throw e;}
+    return {response,rawText,payload};
+  }
+  async function callOllama(){
+    const model=getSelectedOllamaModel();if(!model)throw new Error(selectedProvider()==='ollama-cloud'?'Bitte ein für deinen Ollama-Cloud-Zugang verfügbares Modell eintragen.':'Bitte den exakten Modellnamen eintragen, der auf dem Ollama-Server installiert ist.');
+    const messages=[{role:'system',content:getContext()},...appState.messages.slice(-16).map(m=>({role:m.role==='assistant'?'assistant':'user',content:m.text}))];
+    const result=await requestOllama({model,messages,stream:false,options:{temperature:0.65,num_predict:1200}});const answer=result.payload?.message?.content?.trim();
+    if(!answer)throw new Error(`Ollama hat HTTP ${result.response.status} geantwortet, aber keinen Antworttext geliefert. Antwort: ${result.rawText.slice(0,1200)}`);return answer;
+  }
+  function formatOllamaError(error){
+    const cloud=selectedProvider()==='ollama-cloud';
+    const lines=[`Anbieter: ${cloud?'Ollama Cloud':'Ollama lokal'}`,`Server: ${cloud?($('ollamaProxyUrl').value.trim()||'(HTTPS-Proxy noch nicht eingetragen)')+'/api/chat':($('ollamaUrl').value.trim()||'(nicht eingetragen)')}`,`Modell: ${getSelectedOllamaModel()||'(nicht eingetragen)'}`];
+    if(Number.isFinite(error?.status))lines.push(`HTTP-Status: ${error.status} ${error.statusText||''}`,`Fehlertext: ${(error.payload?.error||error.message||error.rawText||'Unbekannt').toString()}`);else lines.push('HTTP-Status: keiner erhalten',`Fehlertext: ${error?.message||'Unbekannter Fehler'}`);
+    lines.push(cloud?'Cloud-Diagnose: Worker erreichbar? ALLOWED_ORIGIN muss exakt der Webseite entsprechen; OLLAMA_API_KEY muss im Worker als Secret gesetzt sein. Modellzugriff und Ollama-Kontingent prüfen. Nachrichten werden an Ollamas Cloud weitergeleitet.':'Lokale Diagnose: Ollama muss auf einem Server laufen, das Modell muss installiert sein, und die Website muss per CORS/HTTPS zugreifen dürfen.');return lines.join('\n');
+  }
+  async function sendMessage(){
+    if(isThinking)return;const input=$('chatInput'),text=input.value.trim();if(!text)return;
+    input.value='';addMessage('user',text);{const local=localCommand(text);if(local){addMessage('assistant',local.reply,{mode:'local',actions:local.actions||[]});setCore('','BEFEHL AUSGEFÜHRT');if(appState.autoSpeak)speak(local.reply);return;}}isThinking=true;$('sendBtn').disabled=true;setCore('thinking','ANFRAGE WIRD VERARBEITET');showTyping();
+    const provider=selectedProvider();let mode='demo';
+    try{
+      let answer;
+      if(provider==='gemini'&&geminiKey){answer=await callGemini();mode='gemini';}
+      else if(provider==='ollama-cloud'){answer=await callOllama();mode='ollama-cloud';}
+      else if(provider==='ollama'&&$('ollamaUrl').value.trim()&&getOllamaModel()){answer=await callOllama();mode='ollama';}
+      else{await new Promise(r=>setTimeout(r,250));answer=localDemoReply(text);}
+      removeTyping();addMessage('assistant',answer,{mode});setCore('',mode==='demo'?'DEMO-ANTWORT BEREIT':`${providerLabel(provider).toUpperCase()} ANTWORT BEREIT`);if(appState.autoSpeak)speak(answer);
+    }catch(e){
+      removeTyping();const details=(provider==='ollama'||provider==='ollama-cloud')?formatOllamaError(e):formatGeminiError(e,getModelName());showGeminiDiagnostic('error',`${providerLabel(provider)}-Anfrage fehlgeschlagen`,details);
+      const msg=`Die ${providerLabel(provider)}-Anfrage ist fehlgeschlagen.\n${details}\n\nZugangscodes werden nicht im Datenexport gespeichert.`;addMessage('assistant',msg,{mode:'error'});setCore('','VERBINDUNG FEHLGESCHLAGEN');toast(`${providerLabel(provider)} fehlgeschlagen — Details unter System.`);setConnected(false,`${providerLabel(provider)}-Anfrage fehlgeschlagen. Diagnose unten öffnen.`);
+    }finally{isThinking=false;$('sendBtn').disabled=false;renderMessages();updateSummary();}
+  }
+  $('sendBtn').addEventListener('click',sendMessage);$('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}});$('clearChat').addEventListener('click',()=>{if(confirm('Den gesamten lokalen Chatverlauf löschen? Erinnerungen bleiben erhalten.')){appState.messages=[];persist();renderMessages();toast('Chatverlauf gelöscht.');}});
+
+  function renderMemories(){const list=$('memoryList');list.innerHTML='';if(!appState.memories.length){list.innerHTML='<p class="small-note">Noch keine gespeicherten Projektpunkte.</p>';}
+    appState.memories.forEach(m=>{const item=document.createElement('div');item.className='memory-item';const icon=document.createElement('div');icon.className='memory-icon';icon.textContent=m.pinned?'◆':'◇';const body=document.createElement('div');body.className='memory-body';const title=document.createElement('strong');title.textContent=m.title;const p=document.createElement('p');p.textContent=m.text;body.append(title,p);item.append(icon,body);if(!m.pinned){const del=document.createElement('button');del.className='memory-delete';del.setAttribute('aria-label','Erinnerung löschen');del.textContent='×';del.addEventListener('click',()=>{appState.memories=appState.memories.filter(x=>x.id!==m.id);persist();renderMemories();updateSummary();});item.appendChild(del);}list.appendChild(item);});$('memoryPill').textContent=appState.memories.length+' Einträge'; }
+  $('addMemory').addEventListener('click',()=>{const title=$('memoryTitle').value.trim(),text=$('memoryText').value.trim();if(!title||!text){toast('Bitte Titel und Inhalt eintragen.');return;}appState.memories.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),title,text,createdAt:new Date().toISOString(),pinned:false});persist();$('memoryTitle').value='';$('memoryText').value='';renderMemories();updateSummary();toast('Im lokalen Gedächtnis gespeichert.');});
+  function updateSummary(){$('memoryCount').textContent=appState.memories.length+' Projektpunkte';}
+  $('exportData').addEventListener('click',()=>{const bundle={format:'jarvis-mobile-memory',formatVersion:1,exportedAt:new Date().toISOString(),projectProfile:PROJECT_PROFILE,memories:appState.memories,messages:appState.messages,settings:{autoSpeak:appState.autoSpeak,voiceURI:appState.voiceURI},security:{apiKeyIncluded:false},note:'Import in PC-JARVIS vor Verwendung prüfen und mit vorhandenen Daten zusammenführen. Dieses Paket trainiert kein KI-Modell neu.'};const blob=new Blob([JSON.stringify(bundle,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='JARVIS_Mobile_Daten_'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$('dataStatus').textContent='Export erstellt. Der API-Schlüssel ist nicht enthalten.';toast('JARVIS-Daten exportiert.');});
+  $('importTrigger').addEventListener('click',()=>$('importFile').click());$('importFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(data.format!=='jarvis-mobile-memory'&& !Array.isArray(data.memories)){throw new Error('Das Format wurde nicht erkannt.');}const seen=new Set(appState.memories.map(m=>m.id));let count=0;(data.memories||[]).forEach(m=>{if(m&&typeof m.title==='string'&&typeof m.text==='string'&&!seen.has(m.id)){appState.memories.push({...m,id:m.id||String(Date.now()+count)});count++;}});if(Array.isArray(data.messages)){const existing=new Set(appState.messages.map(m=>m.id));data.messages.forEach(m=>{if(m&&typeof m.text==='string'&&!existing.has(m.id))appState.messages.push({...m,id:m.id||String(Date.now()+count)});});appState.messages=appState.messages.slice(-250);}persist();renderMemories();renderMessages();updateSummary();$('dataStatus').textContent=`Import abgeschlossen: ${count} neue Erinnerung(en) zusammengeführt. Vorhandene Einträge blieben bestehen.`;toast('Import geprüft und mit vorhandenen Daten zusammengeführt.');}catch(err){$('dataStatus').textContent='Import fehlgeschlagen: '+err.message;toast('Die Datei konnte nicht importiert werden.');}finally{e.target.value='';}});
+
+  $('testConnection').addEventListener('click',async()=>{
+    const provider=selectedProvider();$('testConnection').disabled=true;$('connectionMessage').textContent=`${providerLabel(provider)}-Verbindung wird geprüft …`;showGeminiDiagnostic('warning',`${providerLabel(provider)}-Verbindung wird getestet`,'Es wird eine kurze Anfrage gesendet.');
+    try{
+      let details='';
+      if(provider==='gemini'){
+        const key=$('apiKey').value.trim();if(!key)throw new Error('Bitte zuerst den Gemini-API-Schlüssel eingeben. Es wurde noch keine Anfrage an Google gesendet.');geminiKey=key;const model=getModelName();
+        const result=await requestGemini(model,{contents:[{role:'user',parts:[{text:'Antworte nur mit: JARVIS-Verbindung erfolgreich.'}]}],generationConfig:{maxOutputTokens:30,temperature:0}});const answer=textFromGemini(result.payload,result.response,result.rawText);
+        details=`HTTP-Status: ${result.response.status} ${result.response.statusText||''}\nModell: ${model}\nGemini-Antwort: ${answer}\n\nDer Gemini-Schlüssel bleibt nur im Arbeitsspeicher dieser Seite und wird nicht exportiert.`;
+      }else{
+        const cloud=provider==='ollama-cloud';
+        if(cloud){getOllamaCloudProxyUrl();}
+        const model=cloud?getOllamaCloudModel():getOllamaModel();if(!model)throw new Error(cloud?'Bitte ein für deinen Ollama-Cloud-Zugang verfügbares Modell eintragen.':'Bitte den exakten Namen eines auf dem Ollama-Server installierten Modells eintragen.');
+        const result=await requestOllama({model,messages:[{role:'user',content:'Antworte nur mit: JARVIS-Verbindung erfolgreich.'}],stream:false,options:{num_predict:30,temperature:0}});const answer=result.payload?.message?.content?.trim();if(!answer)throw new Error(`HTTP ${result.response.status} erhalten, aber keine lesbare Antwort: ${result.rawText.slice(0,1000)}`);
+        details=`HTTP-Status: ${result.response.status} ${result.response.statusText||''}\nServer: ${cloud?getOllamaCloudProxyUrl():getOllamaUrl()}\nModell: ${model}\nOllama-Antwort: ${answer}\n\nDie Antwort kam vom konfigurierten Ollama-${cloud?'Cloud-Dienst über den HTTPS-Worker':'Server'}. Die Browserseite selbst enthält kein KI-Modell.`;
+      }
+      setConnected(true,`${providerLabel(provider)}-Verbindung erfolgreich.`);showGeminiDiagnostic('success',`${providerLabel(provider)}-Verbindung erfolgreich`,details);toast(`${providerLabel(provider)}-Verbindung erfolgreich.`);
+    }catch(error){
+      const errorText=String(error?.message||error||'Unbekannter Fehler');
+      const missingCredential=errorText.includes('keine Anfrage gesendet')||errorText.includes('keine Anfrage an Google wurde gesendet');
+      if(missingCredential){
+        const cloud=provider==='ollama-cloud';
+        const missingItem=cloud?(errorText.includes('Zugangscode')?'JARVIS-Proxy-Zugangscode':'HTTPS-Adresse des Ollama-Zwischendienstes'):'Gemini-API-Schlüssel';
+        const nextStep=cloud?(errorText.includes('Zugangscode')?'Trage in JARVIS denselben persönlichen Code ein, den du im Worker als Secret JARVIS_PROXY_TOKEN gespeichert hast.':'Veröffentliche zuerst den beigelegten Worker, setze OLLAMA_API_KEY und JARVIS_PROXY_TOKEN dort als Secrets und trage hier die HTTPS-Adresse ein.'):'Gib deinen Gemini-Schlüssel selbst im Feld der Systemeinstellungen ein. Teile ihn nicht mit ChatGPT und nicht in Screenshots.';
+        const details=`Es wurde KEINE Anfrage gesendet.\n\nGrund: ${missingItem} fehlt oder ist ungültig.\n\nNächster Schritt: ${nextStep}`;
+        setConnected(false,`${providerLabel(provider)}: Verbindungstest nicht ausgeführt — Konfiguration fehlt.`);
+        showGeminiDiagnostic('warning','Verbindungstest nicht gestartet',details);
+      }else{
+        const details=(provider==='ollama'||provider==='ollama-cloud')?formatOllamaError(error):(Number.isFinite(error?.status)?formatGeminiError(error,getModelName()):`HTTP-Status: keiner erhalten\nFehlertext: ${errorText}\n\nPrüfe Schlüssel, Internetverbindung, Modellzugriff, Kontingent und gegebenenfalls Browser-CORS.`);
+        setConnected(false,`${providerLabel(provider)}-Verbindung fehlgeschlagen. Diagnose beachten.`);showGeminiDiagnostic('error',`${providerLabel(provider)}-Verbindung fehlgeschlagen`,details);
+      }
+    }finally{$('testConnection').disabled=false;}
+  });
+  $('disconnect').addEventListener('click',()=>{
+    geminiKey='';$('apiKey').value='';$('ollamaProxyToken').value='';setConnected(false,selectedProvider()==='gemini'?'Gemini-Schlüssel aus der laufenden Seite entfernt.':'Ollama-Verbindung getrennt. Serveradresse und Modellname bleiben als Einstellungen stehen.');
+    showGeminiDiagnostic('warning','Verbindung getrennt','Der Gemini-Schlüssel wurde aus dem Arbeitsspeicher entfernt. Ollama-Adresse und Modellname bleiben im Formular stehen.');toast('Verbindung getrennt.');
+  });
+
+
+  $('testMicPermission').addEventListener('click',async()=>{
+    const button=$('testMicPermission');button.disabled=true;setVoiceDiagnostic('warning','Mikrofonprüfung läuft','Chrome kann jetzt um Mikrofonzugriff bitten. Der Audiostream wird nach der Prüfung sofort beendet.');
+    try{
+      if(!window.isSecureContext)throw new Error('Kein sicherer HTTPS-Kontext. Öffne die veröffentlichte https://-Adresse in Chrome.');
+      if(!navigator.mediaDevices||typeof navigator.mediaDevices.getUserMedia!=='function')throw new Error('Dieser Browser stellt getUserMedia nicht bereit. Öffne aktuelle Version von Google Chrome über HTTPS.');
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});const tracks=stream.getAudioTracks();const details=tracks.map(t=>`Audioquelle: ${t.label||'Mikrofon (Name nicht freigegeben)'}\nStatus: ${t.readyState}\nAktiviert: ${t.enabled}`).join('\n');tracks.forEach(t=>t.stop());stream.getTracks().forEach(t=>t.stop());
+      if(getSpeechApi()){
+        setVoiceDiagnostic('success','Mikrofonzugriff funktioniert',`${details}\n\nDas bestätigt nur Mikrofonzugriff. Tippe jetzt im Gespräch auf das runde Mikrofon-Symbol und sprich einen kurzen Satz. „network“ oder „not-allowed“ wäre ein separater Spracherkennungs-/Browserfehler.`);$('voiceStatus').textContent='Mikrofonzugriff erlaubt · Erkennung separat testen';
+      }else{
+        setVoiceDiagnostic('warning','Mikrofonzugriff funktioniert, Spracherkennung fehlt',`${details}\n\nDieser Browser bietet keine SpeechRecognition-API. Als Zwischenlösung das Mikrofon auf der Bildschirmtastatur verwenden. Der App-Mikrofonknopf kann ohne Spracherkennungsdienst keine Wörter in Text umwandeln.`);$('voiceStatus').textContent='Mikrofon erlaubt · SpeechRecognition fehlt';
+      }
+    }catch(error){
+      const name=error?.name||'Fehler';let advice='Prüfe HTTPS, Chrome-Siteberechtigung und Androids App-Berechtigung für das Mikrofon.';
+      if(name==='NotAllowedError'||name==='PermissionDeniedError')advice='Chrome: Website-Einstellungen > Mikrofon > Zulassen. Android: Einstellungen > Apps > Chrome > Berechtigungen > Mikrofon erlauben.';
+      else if(name==='NotFoundError'||name==='DevicesNotFoundError')advice='Android meldet kein verfügbares Mikrofon. Prüfe das Gerät und ob der Audiozugriff von einer anderen App blockiert wird.';
+      else if(name==='NotReadableError'||name==='TrackStartError')advice='Das Mikrofon wird möglicherweise von einer anderen App verwendet oder ist momentan nicht verfügbar.';
+      setVoiceDiagnostic('error',`Mikrofonprüfung fehlgeschlagen (${name})`,`${error?.message||'Kein Audiostream verfügbar.'}\n\nNächster Prüfschritt: ${advice}`);$('voiceStatus').textContent=`Mikrofonfehler: ${name}`;toast(`Mikrofontest fehlgeschlagen: ${name}`);
+    }finally{button.disabled=false;}
+  });
+
+  function getSpeechApi() { return window.SpeechRecognition || window.webkitSpeechRecognition || null; }
+
+  let recognitionStarting = false;
+  let recognitionRunning = false;
+  function setVoiceDiagnostic(kind, title, details) {
+    const box = $('voiceDiagnostics');
+    if (!box) return;
+    box.classList.remove('success', 'error', 'warning');
+    box.classList.add(kind || 'warning');
+    box.querySelector('strong').textContent = title || 'Sprachstatus';
+    box.querySelector('pre').textContent = details || '';
+  }
+  function describeSpeechError(code) {
+    const messages = {
+      'not-allowed': 'Mikrofon-/Spracherkennungsberechtigung wurde verweigert. Chrome-Siteberechtigungen prüfen und Mikrofonzugriff erlauben.',
+      'service-not-allowed': 'Der Browser oder Spracherkennungsdienst erlaubt die Anfrage nicht.',
+      'audio-capture': 'Kein nutzbares Mikrofon gefunden. Android-Mikrofonberechtigung und Gerätefunktion prüfen.',
+      'no-speech': 'Keine Sprache erkannt. Ruhig und nah am Mikrofon sprechen und erneut versuchen.',
+      'network': 'Die Spracherkennung meldet einen Netzwerkfehler. Internetverbindung prüfen.',
+      'language-not-supported': 'Die Spracherkennung unterstützt die eingestellte Sprache de-DE nicht.',
+      'aborted': 'Die Spracherkennung wurde abgebrochen.',
+      'phrases-not-supported': 'Die Spracherkennung unterstützt eine angeforderte Phrasenliste nicht.'
+    };
+    return messages[code] || `Spracherkennungsfehler: ${code || 'unbekannt'}. Browserberechtigung, Mikrofon und Netzwerk prüfen.`;
+  }
+  function setupSpeech() {
+    const secureContext = typeof window.isSecureContext === 'boolean' ? window.isSecureContext : null;
+    if (secureContext !== true) {
+      const reason = secureContext === false ? 'Mikrofon braucht HTTPS. Öffne die gehostete https://-Adresse.' : 'Sicherheitsstatus nicht ermittelbar; Spracheingabe vorsichtshalber deaktiviert.';
+      $('voiceStatus').textContent = secureContext === false ? 'Mikrofon braucht HTTPS' : 'Sicherheitsstatus unklar';
+      $('micBtn').disabled = true;
+      $('micBtn').title = reason;
+      setVoiceDiagnostic('error', 'Spracheingabe deaktiviert', reason);
+      return;
+    }
+    const SpeechApi = getSpeechApi();
+    if (!SpeechApi) {
+      $('voiceStatus').textContent = 'Spracherkennung API nicht verfügbar';
+      $('micBtn').disabled = true;
+      $('micBtn').title = 'Dieser Browser stellt keine Web-Spracherkennung bereit. Verwende die Tastatureingabe.';
+      setVoiceDiagnostic('warning', 'Spracherkennung nicht verfügbar', 'window.isSecureContext ist true, aber SpeechRecognition/webkitSpeechRecognition fehlt. Verwende die Tastatureingabe.');
+    } else {
+      $('voiceStatus').textContent = 'Spracherkennung API vorhanden · Berechtigung ungeprüft';
+      $('micBtn').disabled = false;
+      $('micBtn').title = 'Spracheingabe starten';
+      recognition = new SpeechApi();
+      recognition.lang = 'de-DE';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+      recognition.onstart = () => {
+        recognitionStarting = false;
+        recognitionRunning = true;
+        $('micBtn').classList.add('active');
+        $('voiceStatus').textContent = 'Mikrofon aktiv · höre zu';
+        setVoiceDiagnostic('success', 'Spracheingabe läuft', 'Die Browser-Spracherkennung hat gestartet. Sprich jetzt, danach sollte der erkannte Text im Eingabefeld erscheinen.');
+        setCore('listening', 'ICH HÖRE ZU');
+        $('chatInput').placeholder = 'Ich höre zu …';
+      };
+      recognition.onresult = event => {
+        const transcript = event.results?.[0]?.[0]?.transcript || '';
+        $('chatInput').value = transcript;
+        if (transcript.trim()) sendMessage();
+      };
+      recognition.onerror = event => {
+        recognitionStarting = false;
+        recognitionRunning = false;
+        const code = event.error || 'unbekannt';
+        const details = describeSpeechError(code);
+        $('voiceStatus').textContent = `Spracherkennung: ${code}`;
+        setVoiceDiagnostic('error', `Spracheingabe fehlgeschlagen (${code})`, details);
+        toast(details);
+        setCore('', 'SPRACHEINGABE FEHLGESCHLAGEN');
+      };
+      recognition.onend = () => {
+        recognitionStarting = false;
+        recognitionRunning = false;
+        $('micBtn').classList.remove('active');
+        $('chatInput').placeholder = 'Nachricht an JARVIS…';
+        if ($('voiceStatus').textContent === 'Mikrofon aktiv · höre zu') $('voiceStatus').textContent = 'Spracherkennung bereit · Mikrofon wurde noch nicht erneut getestet';
+        if (!$('coreWrap').classList.contains('is-thinking')) setCore('', 'SYSTEM BEREIT');
+      };
+      setVoiceDiagnostic('warning', 'Spracherkennung erkannt, Mikrofon noch nicht bestätigt', 'Die API ist vorhanden. Ob Android die Mikrofonberechtigung und den Spracherkennungsdienst zulässt, zeigt erst ein tatsächlicher Test.');
+    }
+    if (!('speechSynthesis' in window)) {
+      setVoiceDiagnostic('warning', 'Sprachausgabe nicht verfügbar', 'Dieser Browser unterstützt window.speechSynthesis nicht.');
+    }
+  }
+  $('coreWrap').addEventListener('click',()=>{selectView('chat');setTimeout(()=>$('micBtn').click(),200);});
+  $('micBtn').addEventListener('click', () => {
+    if (!recognition) {
+      const message = 'Spracheingabe nicht verfügbar. Nutze die Tastatureingabe.';
+      setVoiceDiagnostic('warning', 'Keine Browser-Spracherkennung', message);
+      toast(message);
+      return;
+    }
+    if (recognitionStarting || recognitionRunning) {
+      toast('Die Spracherkennung läuft bereits. Sprich oder warte, bis sie beendet ist.');
+      return;
+    }
+    recognitionStarting = true;
+    $('voiceStatus').textContent = 'Starte Spracherkennung …';
+    setVoiceDiagnostic('warning', 'Mikrofonstart angefordert', 'Warte auf das Browserereignis onstart. Falls es fehlschlägt, wird der konkrete Fehlercode angezeigt.');
+    try {
+      recognition.start();
+    } catch (error) {
+      recognitionStarting = false;
+      const name = error?.name || 'Error';
+      const detail = `${name}: ${error?.message || 'Der Browser konnte recognition.start() nicht starten.'}`;
+      $('voiceStatus').textContent = `Startfehler: ${name}`;
+      setVoiceDiagnostic('error', 'Spracheingabe konnte nicht starten', detail + '\nNicht pauschal erneut starten: Prüfe, ob die Spracherkennung bereits läuft und ob Chrome die Berechtigung hat.');
+      toast(`Spracheingabe: ${name}`);
+    }
+  });
+  function loadVoices(){if(!('speechSynthesis'in window))return;voices=window.speechSynthesis.getVoices();const select=$('voiceSelect');select.innerHTML='<option value="">Systemstandard (Deutsch)</option>';voices.filter(v=>/^de(-|_)/i.test(v.lang)).forEach(v=>{const o=document.createElement('option');o.value=v.voiceURI;o.textContent=`${v.name} (${v.lang})`;select.appendChild(o);});select.value=appState.voiceURI||'';$('speechPill').textContent=voices.some(v=>/^de/i.test(v.lang))?'Deutsch verfügbar':'Systemstandard';}
+  
+  function cleanForSpeech(t){return String(t).replace(/```[\s\S]*?```/g,' ').replace(/[*_#`>~|]/g,'').replace(/https?:\/\/\S+/g,'Link').replace(/\s*\n+\s*/g,'. ').replace(/\s{2,}/g,' ').trim();}
+function speak(text){if(!('speechSynthesis'in window)||typeof SpeechSynthesisUtterance==='undefined'){setVoiceDiagnostic('warning','Sprachausgabe nicht verfügbar','Dieser Browser stellt keine SpeechSynthesisUtterance-Funktion bereit.');toast('Sprachausgabe wird nicht unterstützt.');return;}try{window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(cleanForSpeech(text).slice(0,5000));utterance.lang='de-DE';const chosen=voices.find(v=>v.voiceURI===$('voiceSelect').value);if(chosen)utterance.voice=chosen;utterance.rate=.96;utterance.pitch=.96;utterance.onstart=()=>{setCore('speaking','JARVIS SPRICHT');setVoiceDiagnostic('success','Sprachausgabe gestartet',`Browser-Sprachausgabe läuft mit ${utterance.voice?.name||'Systemstandard'} (${utterance.voice?.lang||'de-DE'}).`);};utterance.onend=()=>{setCore('','SYSTEM BEREIT');setVoiceDiagnostic('success','Sprachausgabe beendet','Der Browser hat das SpeechSynthesis-Ende-Ereignis ausgelöst.');};utterance.onerror=(event)=>{setCore('','SPRACHAUSGABE FEHLGESCHLAGEN');setVoiceDiagnostic('error','Sprachausgabe fehlgeschlagen',`Fehler: ${event?.error||'unbekannt'}. Prüfe Android-Ausgabe, Lautstärke und verfügbare deutsche Systemstimmen.`);};setVoiceDiagnostic('warning','Sprachausgabe angefordert','Warte auf das Browserereignis onstart. Das Starten der Anfrage allein beweist noch keinen hörbaren Ton.');window.speechSynthesis.speak(utterance);}catch(error){setVoiceDiagnostic('error','Sprachausgabe konnte nicht starten',`${error?.name||'Error'}: ${error?.message||error}`);toast('Sprachausgabe konnte nicht starten.');}}
+  $('autoSpeak').checked=!!appState.autoSpeak;$('autoSpeak').addEventListener('change',()=>{appState.autoSpeak=$('autoSpeak').checked;persist();});$('voiceSelect').addEventListener('change',()=>{appState.voiceURI=$('voiceSelect').value;persist();});$('testVoice').addEventListener('click',()=>speak('System bereit. Ich bin JARVIS. Der Sprachkanal wird getestet.'));if('speechSynthesis'in window){loadVoices();window.speechSynthesis.onvoiceschanged=loadVoices;}
+
+  checkSecureContext();updateSummary();renderMemories();renderMessages();setupSpeech();refreshProviderPanels();setConnected(false,'Wähle unter System einen Anbieter und teste die Verbindung.');setCore('','SYSTEM STANDBY');
+})();
+</script>
+
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}</script>
+</body>
+</html>
